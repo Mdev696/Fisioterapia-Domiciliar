@@ -341,6 +341,38 @@
             height: 100%;
             object-fit: cover;
         }
+
+
+        /* Carrossel de Fotos do Especialista */
+        /* FOTOS DO VICTOR  */
+        /* Carrossel de Fotos Centralizado */
+        .fotos-especialista-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scroll-snap-type: x mandatory;
+            margin-top: 15px;
+
+            /* ESTAS LINHAS REALIZAM A CENTRALIZAÇÃO */
+            justify-content: center;
+            flex-wrap: wrap;
+            /* Permite que elas se ajustem se a tela for pequena */
+        }
+
+        /* Ajuste fino nas fotos para manter o padrão das novas imagens */
+        .foto-card {
+            flex: 0 0 auto;
+            /* Ajusta ao tamanho real da imagem */
+            width: 120px;
+            /* Tamanho fixo para manter a simetria */
+            height: 120px;
+            scroll-snap-align: center;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 1px solid var(--azul-claro);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
     </style>
 </head>
 
@@ -349,7 +381,7 @@
     <header>
         <img src="logo.jpeg" alt="Victor Hugo Fisioterapia" class="logo-img">
         <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
+            <li><a href="#inicio">Inicio</a></li>
             <li><a href="#especialista">Especialista</a></li>
             <li><a href="#locais">Locais</a></li>
             <li><a href="#cadastro">Cadastro</a></li>
@@ -373,6 +405,13 @@
                     hospitalar</strong>, atuando em UTI e reabilitação de pacientes graves.</p>
             <p style="font-size: 0.95rem; color: #555;">Levo essa experiência e segurança para dentro da casa dos meus
                 pacientes, com um processo seguro e individualizado.</p>
+        </div>
+
+        <div class="fotos-especialista-container">
+            <img src="Foto_1.jpeg" alt="Atendimento" class="foto-card">
+            <img src="Foto_2.jpeg" alt="Equipamentos" class="foto-card">
+            <img src="Foto_3.jpeg" alt="Exercícios" class="foto-card">
+            <img src="Foto_4.jpeg" alt="Reabilitação" class="foto-card">
         </div>
 
         <h3 style="margin: 30px 0 15px;">Como eu ajudo seu familiar:</h3>
