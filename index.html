@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victor Hugo - Fisioterapia Domiciliar Especializada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --branco: #ffffff;
@@ -18,8 +19,26 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            /* Nova fonte aplicada aqui */
+            font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
+        }
+
+        /* Deixar os títulos um pouco mais marcantes com a nova fonte */
+        h1,
+        h2,
+        h3,
+        .nav-links a,
+        .btn-send {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Texto corrido com peso normal para leitura leve */
+        p,
+        li,
+        input {
+            font-weight: 400;
         }
 
         body {
