@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Hugo - Fisioterapia Domiciliar Especializada</title>
+    <style>
+        :root {
+            --branco: #ffffff;
+            --azul-claro: #a5ceda;
+            --azul-escuro: #001c5d;
+            --verde-sucesso: #28a745;
+            --cinza-suave: #f8fafb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--branco);
+            color: var(--azul-escuro);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+
+        header {
+            background-color: var(--azul-escuro);
+            padding: 15px 10px;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-img {
+            max-width: 160px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--azul-claro);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 5px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul-claro) 100%);
+            color: var(--branco);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-cta {
+            display: inline-block;
+            background-color: var(--branco);
+            color: var(--azul-escuro);
+            padding: 16px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        section {
+            padding: 60px 20px;
+        }
+
+        .bg-alt {
+            background-color: var(--cinza-suave);
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--azul-claro);
+            margin: 10px auto;
+        }
+
+        .especialista-box {
+            text-align: center;
+        }
+
+        .foto-especialista {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--azul-claro);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .card {
+            background: var(--branco);
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 4px 12px rgba(0, 28, 93, 0.06);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .xp-badge {
+            background: var(--azul-escuro);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .check-list {
+            list-style: none;
+            text-align: left;
+            max-width: 320px;
+            margin: 0 auto;
+        }
+
+        .check-list li {
+            margin-bottom: 12px;
+            padding-left: 20px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .check-list li::before {
+            content: '✔';
+            position: absolute;
+            left: 0;
+            color: var(--verde-sucesso);
+            font-weight: bold;
+        }
+
+        /* CONTAINER: Ajustado para centralização real */
+        .depoimentos-container {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 5px 5px;
+            /* Padding lateral para o card não colar na borda */
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+
+            /* Garante que o conteúdo comece centralizado se houver poucos itens */
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        /* Esconde a barra para um look de App */
+        .depoimentos-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* IMAGENS: Ajuste de proporção e centralização */
+        .depoimento-img {
+            /* Define que cada card ocupa 80% da largura da tela no mobile */
+            /* ou um tamanho fixo de 300px no desktop */
+            flex: 0 0 280px;
+
+            scroll-snap-align: center;
+            margin: 0 auto;
+            /* Ajuda na distribuição do espaço */
+
+            height: 180px;
+            /* Altura reduzida para não ficar gigante verticalmente */
+            border-radius: 12px;
+            border: 1px solid #eee;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+            /* O 'cover' corta as bordas pretas do print, focando no texto */
+            /* O 'contain' mostra o print inteiro. Escolha o que preferir: */
+            object-fit: cover;
+            background-color: #121212;
+            /* Fundo escuro para combinar com o print do Google */
+        }
+
+        .btn-google {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--branco);
+            color: #333;
+            padding: 14px 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .locais-lista {
+            list-style: none;
+            text-align: left;
+        }
+
+        .locais-lista li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .locais-lista li::before {
+            content: '📍';
+            position: absolute;
+            left: 0;
+        }
+
+        .form-box input {
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 12px;
+            border: 2px solid var(--azul-claro);
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+
+        .btn-send {
+            width: 100%;
+            background-color: var(--azul-escuro);
+            color: white;
+            padding: 18px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+
+        .whatsapp-btn svg {
+            fill: white;
+            width: 32px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="logo.jpeg" alt="Victor Hugo Fisioterapia" class="logo-img">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#especialista">Especialista</a></li>
+            <li><a href="#locais">Locais</a></li>
+            <li><a href="#cadastro">Cadastro</a></li>
+        </ul>
+    </header>
+
+    <section id="home" class="hero">
+        <h1>Recupere a mobilidade e a segurança do seu familiar idoso sem sair de casa</h1>
+        <p>Fisioterapia domiciliar especializada para idosos em recuperação após cirurgias, internações ou perda de
+            autonomia.</p>
+        <a href="#cadastro" class="btn-cta">Solicitar Avaliação Especializada</a>
+    </section>
+
+    <section id="especialista" class="especialista-box">
+        <img src="vitor.jpeg" alt="Victor Hugo - Fisioterapeuta" class="foto-especialista">
+
+        <div class="xp-badge">18 anos de experiência UTI/Hospitalar</div>
+
+        <div class="card">
+            <p style="margin-bottom: 15px;">Sou fisioterapeuta com <strong>mais de 18 anos de experiência
+                    hospitalar</strong>, atuando em UTI e reabilitação de pacientes graves.</p>
+            <p style="font-size: 0.95rem; color: #555;">Levo essa experiência e segurança para dentro da casa dos meus
+                pacientes, com um processo seguro e individualizado.</p>
+        </div>
+
+        <h3 style="margin: 30px 0 15px;">Como eu ajudo seu familiar:</h3>
+        <ul class="check-list">
+            <li>Recuperar força e mobilidade</li>
+            <li>Reduzir risco de quedas</li>
+            <li>Evitar complicações e reinternações</li>
+            <li>Orientar a família nos cuidados do dia a dia</li>
+        </ul>
+    </section>
+
+    <section id="depoimentos" class="bg-alt">
+        <h2 class="section-title">Prova Social</h2>
+        <div class="card" style="text-align: center;">
+            <p style="margin-bottom: 15px;">Confira o que dizem os pacientes e famílias que já confiam no trabalho do
+                Victor Hugo.</p>
+            <div style="color: #fbbc05; font-size: 1.2rem; margin-bottom: 15px;">★★★★★</div>
+
+            <div class="depoimentos-container">
+                <img src="dep1.jpeg" alt="Depoimento Google 1" class="depoimento-img">
+                <img src="dep2.jpeg" alt="Depoimento Google 2" class="depoimento-img">
+                <img src="dep3.jpeg" alt="Depoimento Google 3" class="depoimento-img">
+            </div>
+
+            <a href="https://www.google.com/search?q=avalia%C3%A7%C3%B5es+sobre+victor+hugo+%7C+fisioterapia+domiciliar&si=AL3DRZEsmMGCryMMFSHJ3StBhOdZ2-6yYkXd_doETEE1OR-qOTBwY-_XS5GQE2AVfCIdfbYZ3-F6gGqp7GgiRk4rAc-YmpobuXRvC_K5ZSQpQZAR1tNmhWodruSIaKx8wDi8KYKPPt9_vuacaKyYLjq5x6RwdbIg4CXawS5q-yTq0fRO7IMDNtaamKlS3TBPup8gWiKxvkRa"
+                target="_blank" class="btn-google">
+                <svg width="18" height="18" viewBox="0 0 24 24">
+                    <path
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+                        fill="#4285F4" />
+                    <path
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+                        fill="#34A853" />
+                    <path
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"
+                        fill="#FBBC05" />
+                    <path
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.66l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+                        fill="#EA4335" />
+                </svg>
+                Ver avaliações no Google
+            </a>
+        </div>
+    </section>
+
+    <section id="locais">
+        <h2 class="section-title">Locais de Atendimento</h2>
+        <div class="card">
+            <ul class="locais-lista">
+                <li><strong>Home Care:</strong> Atendimento 100% no conforto da sua residência.</li>
+                <li>Fisioterapia geriátrica para famílias que buscam segurança e alto nível.</li>
+            </ul>
+        </div>
+
+        <h3 style="margin: 30px 0 15px; text-align: center;">Indicado para idosos que:</h3>
+        <ul class="check-list" style="max-width: 400px; margin: 0 auto;">
+            <li>Estão em recuperação pós-cirúrgica</li>
+            <li>Tiveram alta hospitalar recente</li>
+            <li>Apresentam dificuldade para caminhar</li>
+            <li>Possuem risco de queda</li>
+        </ul>
+    </section>
+
+    <section id="cadastro" class="bg-alt">
+        <h2 class="section-title">Agendar Atendimento</h2>
+        <p style="text-align: center; margin-bottom: 25px;">Acompanhamento estruturado em <strong>plano mensal</strong>
+            para garantir evolução.</p>
+        <div class="form-box">
+            <form id="leadForm">
+                <input type="text" id="nome" placeholder="Seu nome (familiar)" required>
+                <input type="tel" id="whatsapp" placeholder="WhatsApp com DDD" required>
+                <button type="submit" class="btn-send">Falar com Victor Hugo</button>
+            </form>
+        </div>
+    </section>
+
+    <a href="https://wa.me/5500000000000" class="whatsapp-btn" target="_blank">
+        <svg viewBox="0 0 448 512">
+            <path
+                d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.5 5.5-6.5 8.3-9.8 2.8-3.3 3.7-5.6 5.5-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.7 23.5 9.2 31.6 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+        </svg>
+    </a>
+
+    <script>
+        document.getElementById('leadForm').onsubmit = function (e) {
+            e.preventDefault();
+            alert(`Sua solicitação foi enviada! Victor Hugo entrará em contato.`);
+            this.reset();
+        };
+
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop - 110,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
