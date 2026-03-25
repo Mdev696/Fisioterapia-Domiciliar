@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Victor Hugo - Fisioterapia Domiciliar Especializada</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --branco: #ffffff;
@@ -18,8 +19,25 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
+        }
+
+        /* Tipografia Montserrat para Títulos e Botões */
+        h1,
+        h2,
+        h3,
+        .nav-links a,
+        .btn-send {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Tipografia para corpo de texto */
+        p,
+        li,
+        input {
+            font-weight: 400;
         }
 
         body {
@@ -29,39 +47,49 @@
             padding-bottom: 80px;
         }
 
+        /* HEADER: Ajustado para Logo em cima e Links embaixo */
         header {
             background-color: var(--azul-escuro);
-            padding: 15px 10px;
-            text-align: center;
+            padding: 20px 10px;
             position: sticky;
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
+        .header-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
         .logo-img {
-            max-width: 160px;
+            width: 280px;
+            /* Aumentado para máxima visibilidade conforme solicitado */
+            max-width: 90%;
             height: auto;
-            margin-bottom: 10px;
         }
 
         .nav-links {
             list-style: none;
             display: flex;
             justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
+            gap: 15px;
+            flex-wrap: nowrap;
         }
 
         .nav-links a {
             color: var(--azul-claro);
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
             padding: 5px;
+            white-space: nowrap;
         }
 
+        /* HERO SECTION */
         .hero {
             background: linear-gradient(135deg, var(--azul-escuro) 0%, var(--azul-claro) 100%);
             color: var(--branco);
@@ -92,6 +120,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
+        /* SEÇÕES GERAIS */
         section {
             padding: 60px 20px;
         }
@@ -116,6 +145,7 @@
             margin: 10px auto;
         }
 
+        /* ESPECIALISTA: Ajuste de foco no rosto */
         .especialista-box {
             text-align: center;
         }
@@ -124,10 +154,26 @@
             width: 150px;
             height: 150px;
             border-radius: 50%;
-            object-fit: cover;
             border: 5px solid var(--azul-claro);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            /* Sombra mais nítida para destacar o círculo */
             margin-bottom: 20px;
+
+            /* SUPER ZOOM: Aumenta a imagem para o rosto preencher o círculo */
+            object-fit: cover;
+
+            /* ENQUADRAMENTO VERTICAL: Traz o rosto para o centro do círculo */
+            /* O valor de 10% foca mais no topo da imagem (cabelo/testa) para cortar o fundo inferior */
+            object-position: 50% 100%;
+
+            /* SUPER ZOOM MANUAL: Aproxima a imagem em 60% dentro do círculo */
+            /* Isso empurra o fundo para fora das bordas do círculo */
+            transform: scale(1.6);
+
+            /* AJUSTE DE POSIÇÃO PÓS-ZOOM: Compensação para o zoom não "subir" demais a foto */
+            margin-top: 15px;
+
+            display: inline-block;
         }
 
         .card {
@@ -149,6 +195,33 @@
             margin-bottom: 15px;
         }
 
+        /* Container para foto única */
+        .fotos-especialista-container {
+            display: flex;
+            justify-content: center;
+            padding: 10px 0;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        /* Estilo para a foto de destaque única */
+        .foto-card-unica {
+            width: 100%;
+            max-width: 350px;
+            /* Limite para não ficar gigante em tablets */
+            height: 280px;
+            /* Aumentei um pouco a altura para dar mais presença */
+            border-radius: 18px;
+            object-fit: cover;
+
+            /* Ajuste para focar no Victor Hugo e no atendimento */
+            object-position: center 20%;
+
+            border: 3px solid var(--azul-claro);
+            box-shadow: 0 6px 20px rgba(0, 28, 93, 0.12);
+        }
+
+        /* LISTAS E FORMULÁRIOS */
         .check-list {
             list-style: none;
             text-align: left;
@@ -171,84 +244,63 @@
             font-weight: bold;
         }
 
-        /* CONTAINER: Ajustado para centralização real */
+        /* DEPOIMENTOS */
         .depoimentos-container {
             display: flex;
             gap: 10px;
             overflow-x: auto;
             padding: 5px 5px;
-            /* Padding lateral para o card não colar na borda */
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-
-            /* Garante que o conteúdo comece centralizado se houver poucos itens */
             justify-content: flex-start;
             align-items: center;
         }
 
-        /* Esconde a barra para um look de App */
         .depoimentos-container::-webkit-scrollbar {
             display: none;
         }
 
-        /* IMAGENS: Ajuste de proporção e centralização */
         .depoimento-img {
-            /* Define que cada card ocupa 80% da largura da tela no mobile */
-            /* ou um tamanho fixo de 300px no desktop */
             flex: 0 0 280px;
-
             scroll-snap-align: center;
-            margin: 0 auto;
-            /* Ajuda na distribuição do espaço */
-
             height: 180px;
-            /* Altura reduzida para não ficar gigante verticalmente */
             border-radius: 12px;
             border: 1px solid #eee;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-
-            /* O 'cover' corta as bordas pretas do print, focando no texto */
-            /* O 'contain' mostra o print inteiro. Escolha o que preferir: */
             object-fit: cover;
             background-color: #121212;
-            /* Fundo escuro para combinar com o print do Google */
         }
 
-        .btn-google {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background-color: var(--branco);
-            color: #333;
-            padding: 14px 20px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        /* VÍDEOS */
+        .videos-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 0;
+            scroll-snap-type: x mandatory;
+        }
+
+        .videos-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .video-card {
+            flex: 0 0 250px;
+            scroll-snap-align: center;
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-card video {
             width: 100%;
-            margin-top: 10px;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .locais-lista {
-            list-style: none;
-            text-align: left;
-        }
-
-        .locais-lista li {
-            margin-bottom: 15px;
-            padding-left: 30px;
-            position: relative;
-        }
-
-        .locais-lista li::before {
-            content: '📍';
-            position: absolute;
-            left: 0;
-        }
-
+        /* FORMULÁRIO E WHATSAPP */
         .form-box input {
             width: 100%;
             padding: 16px;
@@ -294,13 +346,15 @@
 <body>
 
     <header>
-        <img src="logo.jpeg" alt="Victor Hugo Fisioterapia" class="logo-img">
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#especialista">Especialista</a></li>
-            <li><a href="#locais">Locais</a></li>
-            <li><a href="#cadastro">Cadastro</a></li>
-        </ul>
+        <div class="header-container">
+            <img src="logo.jpeg" alt="Victor Hugo Fisioterapia" class="logo-img">
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#especialista">Especialista</a></li>
+                <li><a href="#locais">Locais</a></li>
+                <li><a href="#cadastro">Cadastro</a></li>
+            </ul>
+        </div>
     </header>
 
     <section id="home" class="hero">
@@ -320,6 +374,10 @@
                     hospitalar</strong>, atuando em UTI e reabilitação de pacientes graves.</p>
             <p style="font-size: 0.95rem; color: #555;">Levo essa experiência e segurança para dentro da casa dos meus
                 pacientes, com um processo seguro e individualizado.</p>
+        </div>
+
+        <div class="fotos-especialista-container">
+            <img src="Foto_4.jpeg" alt="Atendimento Especializado" class="foto-card-unica">
         </div>
 
         <h3 style="margin: 30px 0 15px;">Como eu ajudo seu familiar:</h3>
@@ -380,6 +438,30 @@
             <li>Tiveram alta hospitalar recente</li>
             <li>Apresentam dificuldade para caminhar</li>
             <li>Possuem risco de queda</li>
+            <div class="videos-container" style="margin-top: 25px;">
+                <div class="video-card">
+                    <video controls poster="thumb1.jpg">
+                        <source src="vid_1.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+                <div class="video-card">
+                    <video controls poster="thumb2.jpg">
+                        <source src="vid_2.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+                <div class="video-card">
+                    <video controls poster="thumb3.jpg">
+                        <source src="vid_3.mp4" type="video/mp4">
+                        Seu navegador não suporta vídeos.
+                    </video>
+                </div>
+            </div>
+            <p
+                style="text-align: center; font-size: 0.8rem; color: var(--azul-escuro); margin-top: 10px; opacity: 0.7;">
+                ⬅ Deslize para ver os vídeos de atendimento ➡
+            </p>
         </ul>
     </section>
 
