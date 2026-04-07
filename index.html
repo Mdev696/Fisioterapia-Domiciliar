@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Hugo | Fisioterapia Domiciliar Especializada</title>
+    <title>Victor Hugo | Fisioterapia Especializada</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600;800&display=swap"
         rel="stylesheet">
@@ -32,7 +32,6 @@
             color: #2d3436;
             overflow-x: hidden;
             scroll-behavior: smooth;
-            /* Rolagem suave nativa */
         }
 
         /* BACKGROUND DECORATIVO */
@@ -49,7 +48,6 @@
             border-radius: 50%;
         }
 
-        /* HEADER PREMIUM - Mantendo o Menu */
         header {
             background: var(--azul-escuro);
             padding: 40px 20px 20px;
@@ -65,11 +63,6 @@
             height: auto;
             display: block;
             margin: 0 auto 20px;
-        }
-
-        /* MENU DE NAVEGAÇÃO INTERNA */
-        .main-nav {
-            margin-top: 15px;
         }
 
         .main-nav ul {
@@ -88,81 +81,27 @@
             letter-spacing: 2px;
             font-weight: 600;
             opacity: 0.8;
-            transition: opacity 0.3s;
+            transition: 0.3s;
         }
 
-        .main-nav a:hover,
-        .main-nav a:active {
-            opacity: 1;
-            color: var(--azul-claro);
-        }
-
-        /* ==========================================================================
-           SEÇÃO DA FOTO DO ESPECIALISTA - RESTAURADO FORMATO "RETRATO" CENTRALIZADO
-           ==========================================================================
-        */
+        /* FOTO RETRATO PREMIUM CENTRALIZADA */
         .specialist-frame {
-            /* 1. LARGURA: Ocupa a maior parte da tela mobile */
             width: 85%;
             max-width: 400px;
-            /* Limita o tamanho em telas maiores */
-
-            /* 2. ALTURA: Garante a proporção Retrato */
-            height: 600px;
-
-            /* 3. CENTRALIZAÇÃO E ESPAÇAMENTO */
+            height: 450px;
             margin: 40px auto;
-
             overflow: hidden;
             position: relative;
             background-color: var(--azul-escuro);
             z-index: 5;
-
-            /* 4. INTEGRAÇÃO DA IMAGEM E ENQUADRAMENTO (Rosto/Peito) */
-            background-image: url('Foto_4.jpeg');
-            /* Usando o nome do seu arquivo */
-
-            /* background-size: 180%; -> Dá o zoom necessário para focar no peito/rosto.
-               background-position: center 15%; -> Centraliza horiz. e fixa o corte no topo.
-               
-               Isso faz com que as laterais e o tablet fiquem escondidos.
-            */
+            background-image: url('vitor.jpeg');
             background-size: 180%;
             background-position: center 15%;
             background-repeat: no-repeat;
-
             border-radius: 20px;
-            /* Cantos arredondados */
             box-shadow: var(--sombra-premium);
-            /* Sombra para dar profundidade */
-
-            scroll-margin-top: 100px;
-            /* ID Início */
         }
 
-        /* SEÇÃO HERO / INTRO */
-        .intro {
-            padding: 20px 25px 40px;
-            text-align: center;
-            position: relative;
-            z-index: 5;
-        }
-
-        .intro h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--azul-escuro);
-            margin-bottom: 15px;
-        }
-
-        .intro p {
-            font-size: 1rem;
-            color: #636e72;
-            max-width: 80%;
-            margin: 0 auto;
-        }
-
-        /* CONTAINER DA CASCATA (ACCORDION) */
         .accordion-section {
             padding: 0 20px 40px;
             max-width: 600px;
@@ -177,8 +116,6 @@
             font-weight: 800;
             margin: 30px 0 15px 10px;
             display: block;
-            scroll-margin-top: 100px;
-            /* ID de Navegação */
         }
 
         .accordion-item {
@@ -203,9 +140,6 @@
             font-size: 1.05rem;
             color: var(--azul-escuro);
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 12px;
         }
 
         .plus-icon {
@@ -217,8 +151,9 @@
             transition: var(--transicao);
         }
 
-        .plus-icon::before,
-        .plus-icon::after {
+        .plus-icon::before {
+            width: 12px;
+            height: 2px;
             content: '';
             position: absolute;
             background: var(--azul-escuro);
@@ -227,14 +162,15 @@
             transform: translate(-50%, -50%);
         }
 
-        .plus-icon::before {
-            width: 12px;
-            height: 2px;
-        }
-
         .plus-icon::after {
             width: 2px;
             height: 12px;
+            content: '';
+            position: absolute;
+            background: var(--azul-escuro);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             transition: var(--transicao);
         }
 
@@ -242,7 +178,6 @@
             max-height: 0;
             overflow: hidden;
             transition: all 0.5s ease-in-out;
-            background: linear-gradient(to bottom, #fff, var(--gelo));
         }
 
         .inner-text {
@@ -250,34 +185,6 @@
             font-size: 0.95rem;
             color: #555;
             line-height: 1.7;
-        }
-
-        .inner-text ul {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .inner-text li {
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-        }
-
-        .inner-text li::before {
-            content: '•';
-            color: var(--azul-claro);
-            font-weight: bold;
-        }
-
-        /* ESTADO ABERTO */
-        .accordion-item.active {
-            border: 1px solid var(--azul-claro);
-            transform: translateY(-5px);
-        }
-
-        .accordion-item.active .plus-icon {
-            background: var(--azul-escuro);
         }
 
         .accordion-item.active .plus-icon::after {
@@ -288,243 +195,77 @@
         .accordion-item.active .accordion-content {
             max-height: 500px;
         }
-
-        /* BOTÃO WHATSAPP FIXO / CTA */
-        .cta-box {
-            padding: 30px 20px 60px;
-            text-align: center;
-            scroll-margin-top: 100px;
-            /* ID Agendamento */
-        }
-
-        .btn-premium {
-            background: var(--azul-escuro);
-            color: var(--branco);
-            padding: 20px 45px;
-            border-radius: 15px;
-            text-decoration: none;
-            font-weight: 800;
-            display: inline-block;
-            box-shadow: 0 15px 30px rgba(0, 28, 93, 0.2);
-            font-size: 1.1rem;
-            transition: var(--transicao);
-        }
-
-        .btn-premium:active {
-            transform: scale(0.9);
-        }
-
-        footer {
-            background: var(--azul-escuro);
-            color: rgba(255, 255, 255, 0.6);
-            padding: 40px 20px;
-            text-align: center;
-            font-size: 0.8rem;
-        }
-
-        footer strong {
-            color: var(--branco);
-            display: block;
-            margin-bottom: 5px;
-        }
     </style>
 </head>
 
 <body>
-
     <div class="bg-shape"></div>
 
     <header>
-        <img src="logo.jpeg" alt="Victor Hugo Fisioterapia Domiciliar" class="logo-img">
-
+        <img src="logo.jpeg" alt="Logo Victor Hugo" class="logo-img">
         <nav class="main-nav">
             <ul>
                 <li><a href="#inicio">Início</a></li>
-                <li><a href="#atendimento">Atendimento</a></li>
-                <li><a href="#especialidades">Especialidades</a></li>
-                <li><a href="#duvidas">Dúvidas</a></li>
-                <li><a href="#agendamento">Agendamento</a></li>
+                <li><a href="#experiencia">Experiência</a></li>
+                <li><a href="#contato">Contato</a></li>
             </ul>
         </nav>
     </header>
 
     <div id="inicio" class="specialist-frame"></div>
 
-    <section class="intro">
-        <h2>Reabilitação com Excelência</h2>
-        <p>Atendimento especializado focado na sua independência física, sem que você precise sair de casa.</p>
-    </section>
-
     <main class="accordion-section">
-
-        <span id="atendimento" class="group-title">O Atendimento</span>
+        <span id="experiencia" class="group-title">Experiência Profissional</span>
 
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3>🏠 Como funciona o Domiciliar?</h3>
+                <h3>🏥 Experiência hospitalar</h3>
                 <div class="plus-icon"></div>
             </div>
             <div class="accordion-content">
                 <div class="inner-text">
-                    O atendimento domiciliar (Home Care) leva toda a estrutura de uma clínica até você.
-                    <ul>
-                        <li>Avaliação completa no seu ambiente real.</li>
-                        <li>Equipamentos de ponta levados pelo profissional.</li>
-                        <li>Economia de tempo e eliminação do estresse do trânsito.</li>
-                        <li>Maior adesão ao tratamento por pacientes idosos ou acamados.</li>
-                    </ul>
+                    Sou fisioterapeuta com mais de 18 anos de experiência hospitalar, atuando em UTI, pós-operatório e
+                    reabilitação de pacientes graves.
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3>📍 Onde atendemos?</h3>
+                <h3>🚀 Minha trajetória</h3>
                 <div class="plus-icon"></div>
             </div>
             <div class="accordion-content">
                 <div class="inner-text">
-                    Nossa rede de atendimento abrange regiões estratégicas:
-                    <ul>
-                        <li><strong>Rio de Janeiro:</strong> Zona Sul, Barra da Tijuca e Recreio.</li>
-                        <li><strong>Espírito Santo:</strong> Vitória, Vila Velha, Serra e Cariacica.</li>
-                        <li>Outras regiões sob consulta prévia de disponibilidade.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <span id="especialidades" class="group-title">Especialidades Técnicas</span>
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <h3>🦴 Ortopedia e Traumatologia</h3>
-                <div class="plus-icon"></div>
-            </div>
-            <div class="accordion-content">
-                <div class="inner-text">
-                    Tratamento de lesões musculares, fraturas, entorses e disfunções articulares.
-                    Foco no alívio da dor e retorno imediato às atividades de vida diária.
+                    Ao longo da minha trajetória, acompanhei de perto a recuperação de pacientes após cirurgias
+                    cardíacas, ortopédicas, quadros respiratórios graves e politraumatismos.
                 </div>
             </div>
         </div>
 
         <div class="accordion-item">
             <div class="accordion-header">
-                <h3>⚡ Reabilitação Pós-Operatória</h3>
+                <h3>🎯 Processo de reabilitação</h3>
                 <div class="plus-icon"></div>
             </div>
             <div class="accordion-content">
                 <div class="inner-text">
-                    Acompanhamento rigoroso após cirurgias de joelho, quadril, ombro e coluna.
-                    Trabalhamos na prevenção de aderências, controle de edema e ganho de amplitude de movimento.
+                    Hoje, levo essa experiência para dentro da casa dos meus pacientes, conduzindo um processo de
+                    reabilitação seguro, estruturado e individualizado.
                 </div>
             </div>
         </div>
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <h3>👴 Geriatria e Mobilidade</h3>
-                <div class="plus-icon"></div>
-            </div>
-            <div class="accordion-content">
-                <div class="inner-text">
-                    Foco na prevenção de quedas, fortalecimento muscular e manutenção da autonomia do idoso, garantindo
-                    uma vida mais ativa e segura dentro de casa.
-                </div>
-            </div>
-        </div>
-
-        <span id="duvidas" class="group-title">Dúvidas Frequentes</span>
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <h3>💳 Quais as formas de pagamento?</h3>
-                <div class="plus-icon"></div>
-            </div>
-            <div class="accordion-content">
-                <div class="inner-text">
-                    Aceitamos pagamentos via PIX, Cartão de Crédito e pacotes mensais com desconto. Emitimos recibo para
-                    solicitação de reembolso em planos de saúde.
-                </div>
-            </div>
-        </div>
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <h3>⏱ Qual a duração da sessão?</h3>
-                <div class="plus-icon"></div>
-            </div>
-            <div class="accordion-content">
-                <div class="inner-text">
-                    Cada atendimento é individualizado e dura em média 60 minutos, garantindo dedicação total do
-                    profissional ao paciente.
-                </div>
-            </div>
-        </div>
-
-        <div id="agendamento" class="cta-box">
-            <a href="https://wa.me/5500000000000" class="btn-premium">Agendar Avaliação Domiciliar</a>
-        </div>
-
     </main>
 
-    <footer>
-        <strong>VICTOR HUGO</strong>
-        Fisioterapeuta Especialista<br>
-        Atendimento no Rio de Janeiro e Espírito Santo<br><br>
-        © 2026 • Todos os direitos reservados.
-    </footer>
-
     <script>
-        const items = document.querySelectorAll('.accordion-item');
-
-        // Função principal do acordeão
-        items.forEach(item => {
-            item.querySelector('.accordion-header').addEventListener('click', () => {
+        document.querySelectorAll('.accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
                 const isActive = item.classList.contains('active');
-
-                // Fecha todos
-                items.forEach(i => i.classList.remove('active'));
-
-                // Se não estava ativo, abre o clicado
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+                document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
             });
         });
-
-        // MELHORIA DE UX: Integração Menu + Acordeão
-        const menuLinks = document.querySelectorAll('.main-nav a');
-
-        menuLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                // Previne o comportamento padrão imediato
-                e.preventDefault();
-
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    // 1. Rola até o elemento
-                    targetElement.scrollIntoView({ behavior: 'smooth' });
-
-                    // 2. Tenta encontrar o primeiro item de acordeão desse grupo e abre-o
-                    const nextAccordionItem = targetElement.nextElementSibling;
-
-                    if (nextAccordionItem && nextAccordionItem.classList.contains('accordion-item')) {
-                        // Pequeno delay para a rolagem terminar antes de abrir
-                        setTimeout(() => {
-                            // Fecha todos primeiro
-                            items.forEach(i => i.classList.remove('active'));
-                            // Abre o item alvo
-                            nextAccordionItem.classList.add('active');
-                        }, 600);
-                    }
-                }
-            });
-        });
-
     </script>
 </body>
 
