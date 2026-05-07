@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADDAF - Monitoramento de Direitos Autorais</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --success: #27ae60;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            color: var(--primary);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f8f9fa;
+            color: var(--primary);
+        }
+
+        .status-pill {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background: var(--success);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>ADDAF - Sistema de Monitoramento</h1>
+        <div id="relogio">00:00:00</div>
+    </header>
+
+    <div class="container">
+        <div class="stats-grid">
+            <div class="card">
+                <h3>Captura Manual</h3>
+                <p>Simule a busca de músicas nas emissoras agora.</p>
+                <button class="btn" onclick="simularCaptura()">Executar Captura (2h)</button>
+            </div>
+            <div class="card">
+                <h3>Total Capturado</h3>
+                <h2 id="totalMusicas">0</h2>
+            </div>
+        </div>
+
+        <h2>Relatório de Execuções Recentes</h2>
+        <table id="tabelaRelatorio">
+            <thead>
+                <tr>
+                    <th>Horário</th>
+                    <th>Emissora/Plataforma</th>
+                    <th>Música</th>
+                    <th>Artista</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="corpoTabela">
+                <!-- Dados entrarão aqui -->
+            </tbody>
+        </table>
+
+        <button class="btn" style="margin-top: 20px; background: #7f8c8d;" onclick="limparDados()">Limpar
+            LocalStorage</button>
+    </div>
+
+    <script>
+        // Inicialização do LocalStorage
+        let dbRelatorio = JSON.parse(localStorage.getItem('addaf_relatorios')) || [];
+
+        function atualizarTela() {
+            const corpoTabela = document.getElementById('corpoTabela');
+            const totalMusicas = document.getElementById('totalMusicas');
+            corpoTabela.innerHTML = '';
+
+            // Inverter para mostrar os mais recentes primeiro
+            dbRelatorio.slice().reverse().forEach(item => {
+                const row = `<tr>
+                <td>${item.horario}</td>
+                <td><strong>${item.emissora}</strong></td>
+                <td>${item.musica}</td>
+                <td>${item.artista}</td>
+                <td><span class="status-pill">Monitorado</span></td>
+            </tr>`;
+                corpoTabela.innerHTML += row;
+            });
+
+            totalMusicas.innerText = dbRelatorio.length;
+        }
+
+        function simularCaptura() {
+            // Simulando dados que viriam da web no futuro
+            const emissoras = ["Rádio Mix FM", "YouTube Music", "Globo News", "Spotify Top 50", "Antena 1"];
+            const musicas = [
+                { m: "Flowers", a: "Miley Cyrus" },
+                { m: "Houdini", a: "Eminem" },
+                { m: "Blinding Lights", a: "The Weeknd" },
+                { m: "Espresso", a: "Sabrina Carpenter" }
+            ];
+
+            const randomEmissora = emissoras[Math.floor(Math.random() * emissoras.length)];
+            const randomMusica = musicas[Math.floor(Math.random() * musicas.length)];
+
+            const novaCaptura = {
+                id: Date.now(),
+                horario: new Date().toLocaleTimeString(),
+                emissora: randomEmissora,
+                musica: randomMusica.m,
+                artista: randomMusica.a
+            };
+
+            dbRelatorio.push(novaCaptura);
+            localStorage.setItem('addaf_relatorios', JSON.stringify(dbRelatorio));
+
+            atualizarTela();
+        }
+
+        function limparDados() {
+            if (confirm("Deseja apagar o histórico local?")) {
+                localStorage.removeItem('addaf_relatorios');
+                dbRelatorio = [];
+                atualizarTela();
+            }
+        }
+
+        // Relógio simples
+        setInterval(() => {
+            document.getElementById('relogio').innerText = new Date().toLocaleTimeString();
+        }, 1000);
+
+        // Carregar dados ao abrir a página
+        atualizarTela();
+    </script>
+
+</body>
+
+</html>
