@@ -1,272 +1,248 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Victor Hugo | Fisioterapia Especializada</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;600;800&display=swap"
-        rel="stylesheet">
-
+    <title>ADDAF | Painel de Controle</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         :root {
-            --azul-escuro: #001c5d;
-            --azul-claro: #a5ceda;
-            --branco: #ffffff;
-            --gelo: #f8fafc;
-            --sombra-premium: 0 15px 35px rgba(0, 28, 93, 0.1);
-            --transicao: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --accent: #38bdf8;
+            --danger: #ef4444;
+            --success: #22c55e;
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: var(--gelo);
-            color: #2d3436;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* BACKGROUND DECORATIVO */
-        .bg-shape {
-            position: fixed;
-            top: -100px;
-            right: -100px;
-            width: 400px;
-            height: 400px;
-            background: var(--azul-claro);
-            filter: blur(120px);
-            opacity: 0.2;
-            z-index: -1;
-            border-radius: 50%;
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
-            background: var(--azul-escuro);
-            padding: 40px 20px 20px;
-            text-align: center;
-            border-bottom: 6px solid var(--azul-claro);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
-            z-index: 20;
-        }
-
-        .logo-img {
-            max-width: 320px;
-            height: auto;
-            display: block;
-            margin: 0 auto 20px;
-        }
-
-        .main-nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .main-nav a {
-            text-decoration: none;
-            color: var(--branco);
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            font-weight: 600;
-            opacity: 0.8;
-            transition: 0.3s;
-        }
-
-        /* FOTO RETRATO PREMIUM CENTRALIZADA */
-        .specialist-frame {
-            width: 85%;
-            max-width: 400px;
-            height: 450px;
-            margin: 40px auto;
-            overflow: hidden;
-            position: relative;
-            background-color: var(--azul-escuro);
-            z-index: 5;
-            background-image: url('vitor.jpeg');
-            background-size: 180%;
-            background-position: center 15%;
-            background-repeat: no-repeat;
-            border-radius: 20px;
-            box-shadow: var(--sombra-premium);
-        }
-
-        .accordion-section {
-            padding: 0 20px 40px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .group-title {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            color: var(--azul-claro);
-            letter-spacing: 2px;
-            font-weight: 800;
-            margin: 30px 0 15px 10px;
-            display: block;
-        }
-
-        .accordion-item {
-            background: var(--branco);
-            margin-bottom: 12px;
-            border-radius: 18px;
-            border: 1px solid rgba(165, 206, 218, 0.3);
-            box-shadow: var(--sombra-premium);
-            overflow: hidden;
-            transition: var(--transicao);
-        }
-
-        .accordion-header {
-            padding: 22px;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-bottom: 1px solid #334155;
             display: flex;
             justify-content: space-between;
             align-items: center;
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .status-bar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #334155;
+            text-align: center;
+        }
+
+        .stat-card h3 { margin: 0; font-size: 0.9rem; color: #94a3b8; text-transform: uppercase; }
+        .stat-card p { margin: 0.5rem 0 0; font-size: 1.8rem; font-weight: bold; color: var(--accent); }
+
+        .controls {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            border: none;
             cursor: pointer;
+            font-weight: 600;
+            transition: 0.2s;
         }
 
-        .accordion-header h3 {
-            font-size: 1.05rem;
-            color: var(--azul-escuro);
-            font-weight: 700;
-        }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-outline { background: transparent; border: 1px solid #334155; color: white; }
+        .btn:hover { opacity: 0.8; transform: translateY(-2px); }
 
-        .plus-icon {
-            width: 28px;
-            height: 28px;
-            background: var(--azul-claro);
-            border-radius: 50%;
-            position: relative;
-            transition: var(--transicao);
-        }
-
-        .plus-icon::before {
-            width: 12px;
-            height: 2px;
-            content: '';
-            position: absolute;
-            background: var(--azul-escuro);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .plus-icon::after {
-            width: 2px;
-            height: 12px;
-            content: '';
-            position: absolute;
-            background: var(--azul-escuro);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            transition: var(--transicao);
-        }
-
-        .accordion-content {
-            max-height: 0;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--card-bg);
+            border-radius: 12px;
             overflow: hidden;
-            transition: all 0.5s ease-in-out;
         }
 
-        .inner-text {
-            padding: 0 22px 25px 22px;
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.7;
+        th, td { padding: 1rem; text-align: left; border-bottom: 1px solid #334155; }
+        th { background: #1e293b; color: #94a3b8; font-size: 0.8rem; text-transform: uppercase; }
+        
+        .badge {
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: bold;
         }
+        .badge-live { background: rgba(34, 197, 94, 0.2); color: var(--success); border: 1px solid var(--success); }
 
-        .accordion-item.active .plus-icon::after {
-            transform: translate(-50%, -50%) rotate(90deg);
-            opacity: 0;
-        }
-
-        .accordion-item.active .accordion-content {
-            max-height: 500px;
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #64748b;
         }
     </style>
 </head>
-
 <body>
-    <div class="bg-shape"></div>
 
-    <header>
-        <img src="logo.jpeg" alt="Logo Victor Hugo" class="logo-img">
-        <nav class="main-nav">
-            <ul>
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#experiencia">Experiência</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <div>
+        <h2 style="margin:0; color: var(--accent)">ADDAF <span style="color: white; font-weight: 300;">Monitor</span></h2>
+    </div>
+    <div id="clock" style="font-family: monospace; font-size: 1.2rem;">00:00:00</div>
+</header>
 
-    <div id="inicio" class="specialist-frame"></div>
-
-    <main class="accordion-section">
-        <span id="experiencia" class="group-title">Experiência Profissional</span>
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <h3>🏥 Experiência hospitalar</h3>
-                <div class="plus-icon"></div>
-            </div>
-            <div class="accordion-content">
-                <div class="inner-text">
-                    Sou fisioterapeuta com mais de 18 anos de experiência hospitalar, atuando em UTI, pós-operatório e
-                    reabilitação de pacientes graves.
-                </div>
-            </div>
+<div class="container">
+    <div class="status-bar">
+        <div class="stat-card">
+            <h3>Músicas Capturadas</h3>
+            <p id="count-total">0</p>
         </div>
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <h3>🚀 Minha trajetória</h3>
-                <div class="plus-icon"></div>
-            </div>
-            <div class="accordion-content">
-                <div class="inner-text">
-                    Ao longo da minha trajetória, acompanhei de perto a recuperação de pacientes após cirurgias
-                    cardíacas, ortopédicas, quadros respiratórios graves e politraumatismos.
-                </div>
-            </div>
+        <div class="stat-card">
+            <h3>Última Varredura</h3>
+            <p id="last-scan" style="font-size: 1.2rem; margin-top: 15px;">Nenhuma</p>
         </div>
-
-        <div class="accordion-item">
-            <div class="accordion-header">
-                <h3>🎯 Processo de reabilitação</h3>
-                <div class="plus-icon"></div>
-            </div>
-            <div class="accordion-content">
-                <div class="inner-text">
-                    Hoje, levo essa experiência para dentro da casa dos meus pacientes, conduzindo um processo de
-                    reabilitação seguro, estruturado e individualizado.
-                </div>
-            </div>
+        <div class="stat-card">
+            <h3>Próximo Relatório</h3>
+            <p id="timer" style="font-size: 1.2rem; margin-top: 15px;">02:00:00</p>
         </div>
-    </main>
+    </div>
 
-    <script>
-        document.querySelectorAll('.accordion-header').forEach(header => {
-            header.addEventListener('click', () => {
-                const item = header.parentElement;
-                const isActive = item.classList.contains('active');
-                document.querySelectorAll('.accordion-item').forEach(i => i.classList.remove('active'));
-                if (!isActive) item.classList.add('active');
+    <div class="controls">
+        <button class="btn btn-primary" onclick="triggerManualScan()">Forçar Varredura Agora</button>
+        <button class="btn btn-outline" onclick="clearLogs()">Limpar Banco Local</button>
+        <span style="color: #64748b; font-size: 0.9rem;">(Modo de Teste: LocalStorage Ativo)</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Data/Hora</th>
+                <th>Origem</th>
+                <th>Título da Obra</th>
+                <th>Artista / Intérprete</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="log-table">
+            <!-- JS vai preencher -->
+        </tbody>
+    </table>
+    <div id="empty-msg" class="empty-state">Nenhum dado capturado ainda.</div>
+</div>
+
+<script>
+    let logs = JSON.parse(localStorage.getItem('addaf_db')) || [];
+
+    function updateUI() {
+        const tableBody = document.getElementById('log-table');
+        const emptyMsg = document.getElementById('empty-msg');
+        const countTotal = document.getElementById('count-total');
+        
+        tableBody.innerHTML = '';
+        
+        if (logs.length === 0) {
+            emptyMsg.style.display = 'block';
+        } else {
+            emptyMsg.style.display = 'none';
+            // Mostra os 10 últimos para não travar a tela no teste
+            logs.slice().reverse().forEach(item => {
+                const row = `<tr>
+                    <td>${item.timestamp}</td>
+                    <td><span style="color: var(--accent)">${item.source}</span></td>
+                    <td><strong>${item.title}</strong></td>
+                    <td>${item.artist}</td>
+                    <td><span class="badge badge-live">IDENTIFICADO</span></td>
+                </tr>`;
+                tableBody.innerHTML += row;
             });
-        });
-    </script>
-</body>
+        }
+        
+        countTotal.innerText = logs.length;
+        if(logs.length > 0) {
+            document.getElementById('last-scan').innerText = logs[logs.length - 1].timestamp.split(' ')[1];
+        }
+    }
 
+    function triggerManualScan() {
+        const sources = ["Rede Globo (Ao Vivo)", "Jovem Pan FM", "Spotify Brasil Viral", "YouTube Music Live", "Antena 1", "Disney+"];
+        const library = [
+            {t: "Flowers", a: "Miley Cyrus"},
+            {t: "Houdini", a: "Eminem"},
+            {t: "Texas Hold 'Em", a: "Beyoncé"},
+            {t: "Espresso", a: "Sabrina Carpenter"},
+            {t: "Die With A Smile", a: "Lady Gaga & Bruno Mars"},
+            {t: "Puntería", a: "Shakira"}
+        ];
+
+        const randomSource = sources[Math.floor(Math.random() * sources.length)];
+        const randomTrack = library[Math.floor(Math.random() * library.length)];
+        
+        const newEntry = {
+            id: Date.now(),
+            timestamp: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString(),
+            source: randomSource,
+            title: randomTrack.t,
+            artist: randomTrack.a
+        };
+
+        logs.push(newEntry);
+        localStorage.setItem('addaf_db', JSON.stringify(logs));
+        
+        Swal.fire({
+            title: 'Captura Realizada!',
+            text: `Identificado: ${randomTrack.t} em ${randomSource}`,
+            icon: 'success',
+            toast: true,
+            position: 'top-end',
+            timer: 3000,
+            showConfirmButton: false
+        });
+
+        updateUI();
+    }
+
+    function clearLogs() {
+        if(confirm("Deseja resetar o banco de dados local?")) {
+            localStorage.removeItem('addaf_db');
+            logs = [];
+            updateUI();
+        }
+    }
+
+    // Relógio e Contador Progressivo
+    setInterval(() => {
+        document.getElementById('clock').innerText = new Date().toLocaleTimeString();
+    }, 1000);
+
+    // Inicialização
+    updateUI();
+</script>
+
+</body>
 </html>
